@@ -33,4 +33,15 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+    /**
+     * @Route("/whoami", name="app_whoami")
+     */
+    public function whoami()
+    {
+        return new Response($this->getUser()
+            ? ('authorized as ' . $this->getUser()->getUsername())
+            : 'not authorized'
+        );
+    }
 }
