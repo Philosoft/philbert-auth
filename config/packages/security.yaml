@@ -5,6 +5,13 @@ security:
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        users_in_memory:
+            memory:
+                users:
+                    admin:
+                        # password: admin
+                        password: '$argon2id$v=19$m=65536,t=4,p=1$NWMuD8yxEoo4Y7TuE/sYFA$oQ5yeBlgcK4hIJlogtYD9ixuf/LC8Z3GkJkDWFcss6g'
+                        roles: ['ROLE_USER', 'ROLE_ADMIN']
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             id: App\Security\UserProvider
@@ -15,7 +22,7 @@ security:
         main:
             anonymous: true
             lazy: true
-            provider: app_user_provider
+            provider: users_in_memory
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
